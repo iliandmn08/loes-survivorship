@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Advice of Survivors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#000; --fg:#f5f5f7; --dim:#86868b; --faint:#2c2c2e; --red:#ff453a; --gold:#ffd60a; --blue:#64d2ff;
+  --font:-apple-system,"SF Pro Display","Inter",system-ui,Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--fg);font-family:var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
+#stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+section{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 180px;
+  opacity:0;transform:scale(1.03);transition:opacity .9s var(--ease),transform 1.2s var(--ease);pointer-events:none}
+section.on{opacity:1;transform:none;pointer-events:auto}
+.step{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .9s var(--ease)}
+.step.in{opacity:1;transform:none}
+h1{font-size:150px;font-weight:800;letter-spacing:-.045em;line-height:.98}
+h2{font-size:96px;font-weight:700;letter-spacing:-.035em;line-height:1.03}
+h3{font-size:56px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+p.lead{font-size:44px;font-weight:400;color:var(--dim);letter-spacing:-.01em;line-height:1.3;max-width:1350px}
+.eyebrow{font-size:28px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.grad{background:linear-gradient(90deg,#f5f5f7,#86868b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.red{color:var(--red)} .gold{color:var(--gold)} .dim{color:var(--dim)}
+.cite{position:absolute;left:180px;bottom:70px;font-size:22px;color:var(--dim);letter-spacing:.01em}
+.who{position:fixed;left:40px;bottom:28px;font-size:18px;color:#48484a;letter-spacing:.06em;text-transform:uppercase;font-weight:600;z-index:5;transition:opacity .6s}
+.num{position:fixed;right:40px;bottom:28px;font-size:18px;color:#48484a;z-index:5;font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column;gap:34px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:110px;align-items:center}
+.big{font-size:330px;font-weight:800;letter-spacing:-.06em;line-height:.9}
+.pill{display:inline-block;border:2px solid #3a3a3c;border-radius:999px;padding:12px 30px;font-size:30px;color:var(--fg)}
+.row{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+.card{border-top:2px solid #3a3a3c;padding-top:26px}
+.card .k{font-size:28px;color:var(--dim);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.card .v{font-size:50px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+/* advice words */
+.advice{font-size:170px;font-weight:800;letter-spacing:-.05em;line-height:1}
+/* plane */
+.plane svg{width:100%;max-width:900px;height:auto;display:block}
+.hole{fill:var(--red);stroke:#000;stroke-width:2.5;opacity:0;transition:opacity .2s}
+.plane.sh .hole{opacity:1}
+.armour{fill:rgba(255,214,10,.12);stroke:var(--gold);stroke-width:5;opacity:0;transition:opacity 1s var(--ease)}
+.plane.sa .armour{opacity:1}
+/* dots field */
+.field{display:grid;grid-template-columns:repeat(20,1fr);gap:18px;width:1000px}
+.field i{width:30px;height:30px;border-radius:50%;background:var(--fg);transition:background 1.2s var(--ease),opacity 1.2s var(--ease)}
+.field i.off{background:#2c2c2e}
+video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;margin:0 auto}
+.refs{font-size:24px;line-height:1.55;color:var(--dim);max-width:1560px}
+.refs b{color:var(--fg);font-weight:600}
+#black{position:fixed;inset:0;background:#000;z-index:20;display:none}
+#hint{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:30;background:#000;flex-direction:column;gap:20px;font-size:22px;color:var(--dim);cursor:pointer}
+#hint b{color:var(--fg);font-size:40px;font-weight:700}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto}
+  #stage{position:static;transform:none!important;width:auto;height:auto}
+  section{position:relative;width:1920px;height:1080px;opacity:1!important;transform:none!important;page-break-after:always;break-after:page}
+  .step{opacity:1!important;transform:none!important}
+  .plane .hole,.plane .armour{opacity:1!important}
+  .who,.num,#hint,#black{display:none!important}
+  video{display:none}
+  .printonly{display:block!important}
+}
+.printonly{display:none}
+</style>
+</head>
+<body>
+<div id="hint"><b>The Advice of Survivors</b><span>Click to start · → next · ← back · F fullscreen · P presenter view · B black screen</span></div>
+<div id="black"></div>
+<div class="who" id="who"></div><div class="num" id="num"></div>
+<div id="stage">
+
+<!-- ILIAN -->
+<section data-who="Ilian" data-steps="3">
+  <div class="stack">
+    <div class="advice step">Drop out.</div>
+    <div class="advice step">Follow your passion.</div>
+    <div class="advice step">Never give up.</div>
+  </div>
+</section>
+
+<section data-who="Ilian">
+  <div class="stack">
+    <span class="eyebrow">LOES · New Group 8</span>
+    <h1>The advice<br><span class="grad">of survivors.</span></h1>
+    <p class="lead">Survivorship bias in startup advice.</p>
+  </div>
+  <div class="cite">David Bumci · Amalia Dinu-Macelaru · Andria Kvimsadze · Fabián Mafla · Ilian Dammene</div>
+</section>
+
+<section data-who="Ilian" data-steps="2">
+  <div class="cols" style="grid-template-columns:1fr 1fr;gap:60px">
+    <div class="stack" style="gap:26px">
+      <span class="eyebrow">1943 · Bombers that came back</span>
+      <h2 style="font-size:84px">Where would you add armour?</h2>
+      <p class="lead step">The holes are on the wings, the body and the tail.</p>
+      <h3 class="step" style="font-size:48px"><span class="gold">On the engines.</span><br><span class="dim">The planes hit there never came back.</span></h3>
+    </div>
+    <div class="plane" id="plane">
+      <svg viewBox="0 0 900 760" aria-label="B-17 bomber seen from above with bullet holes">
+        <defs>
+          <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3a3c"/><stop offset=".5" stop-color="#5a5a5e"/><stop offset="1" stop-color="#3a3a3c"/></linearGradient>
+          <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55555a"/><stop offset="1" stop-color="#363638"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g stroke="#6e6e73" stroke-width="1.2" stroke-linejoin="round">
+          <path fill="url(#wing)" d="M478 255 L858 316 Q874 320 872 334 L866 349 L478 345 Z"/>
+          <path fill="url(#wing)" d="M422 255 L42 316 Q26 320 28 334 L34 349 L422 345 Z"/>
+          <path fill="url(#wing)" d="M458 640 L636 668 Q648 671 646 682 L642 694 L456 690 Z"/>
+          <path fill="url(#wing)" d="M442 640 L264 668 Q252 671 254 682 L258 694 L444 690 Z"/>
+          <path fill="url(#metal)" d="M450 36 C472 36 482 72 482 124 L480 420 C478 540 468 640 459 712 Q450 722 441 712 C432 640 422 540 420 420 L418 124 C418 72 428 36 450 36 Z"/>
+        </g>
+        <path d="M436 74 Q450 58 464 74 L462 104 Q450 112 438 104 Z" fill="#1c1c1e" opacity=".9"/>
+        <line x1="450" y1="130" x2="450" y2="700" stroke="#2c2c2e" stroke-width="2"/>
+        <rect x="188" y="245" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="205" cy="243" r="6" fill="#8e8e93"/><line x1="167" y1="243" x2="243" y2="243" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="298" y="227" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="315" cy="225" r="6" fill="#8e8e93"/><line x1="277" y1="225" x2="353" y2="225" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="568" y="227" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="585" cy="225" r="6" fill="#8e8e93"/><line x1="547" y1="225" x2="623" y2="225" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="678" y="245" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="695" cy="243" r="6" fill="#8e8e93"/><line x1="657" y1="243" x2="733" y2="243" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+        <g class="armour" filter="url(#glow)"><rect x="175" y="231" width="60" height="130" rx="30"/><rect x="285" y="213" width="60" height="130" rx="30"/><rect x="555" y="213" width="60" height="130" rx="30"/><rect x="665" y="231" width="60" height="130" rx="30"/></g>
+        <g id="holes"></g>
+      </svg>
+    </div>
+  </div>
+  <div class="cite">Abraham Wald, Statistical Research Group, Columbia University (1943)</div>
+</section>
+
+<section data-who="Ilian" data-steps="2">
+  <div class="stack">
+    <span class="eyebrow">Survivorship bias</span>
+    <h2>We learn from the winners,<br><span class="dim">and forget everyone else.</span></h2>
+    <div class="row step" style="margin-top:30px;gap:120px">
+      <div class="card"><div class="k">Closed after 1 year</div><div class="v" style="font-size:120px;font-weight:800;letter-spacing:-.04em">1 in 5</div></div>
+      <div class="card"><div class="k">Closed after 5 years</div><div class="v" style="font-size:120px;font-weight:800;letter-spacing:-.04em">1 in 2</div></div>
+    </div>
+    <p class="lead step">They don't write books. They don't give talks.</p>
+  </div>
+  <div class="cite">New U.S. businesses · U.S. Bureau of Labor Statistics, Business Employment Dynamics</div>
+</section>
+
+<!-- DAVID -->
+<section data-who="David">
+  <div class="stack">
+    <span class="eyebrow">Study 1</span>
+    <h1>Everyday<br><span class="grad">econometricians.</span></h1>
+    <p class="lead">Barron, Huck &amp; Jehiel · American Economic Journal: Microeconomics, 2024</p>
+  </div>
+</section>
+
+<section data-who="David" data-steps="2">
+  <div class="stack">
+    <span class="eyebrow">The experiment</span>
+    <h2>An investment game.<br><span class="dim">You learn from other players.</span></h2>
+    <h3 class="step">But you only see the projects<br>they chose to <span class="gold">go ahead</span> with.</h3>
+    <p class="lead step">The bad ones were stopped. They never appear in the data.</p>
+  </div>
+  <div class="cite">Barron, Huck &amp; Jehiel (2024), AEJ: Micro 16(3), 162–198</div>
+</section>
+
+<section data-who="David" data-steps="2">
+  <div class="stack">
+    <span class="eyebrow">Result</span>
+    <h1><span class="red">Overoptimism.</span></h1>
+    <p class="lead">Players treated selected data as the full picture, and invested too much.</p>
+    <div class="row" style="gap:120px;margin-top:20px">
+      <div class="card step"><div class="k">Stronger</div><div class="v">when the others are<br>more sophisticated</div></div>
+      <div class="card step"><div class="k">Weaker</div><div class="v">when information is<br>more correlated</div></div>
+    </div>
+  </div>
+  <div class="cite">Barron, Huck &amp; Jehiel (2024), AEJ: Micro 16(3), 162–198</div>
+</section>
+
+<!-- AMALIA -->
+<section data-who="Amalia" data-video="1">
+  <video id="vid" src="assets/startups.mp4" preload="auto" playsinline></video>
+  <div class="printonly"><h2>Video: Who isn't here? (1 min 16)</h2><p class="lead">Played live from the presentation website.</p></div>
+</section>
+
+<section data-who="Amalia" data-steps="2">
+  <div class="stack">
+    <span class="eyebrow">Study 2</span>
+    <h1>What you see<br><span class="grad">is all there is.</span></h1>
+    <p class="lead step">Estimate a hidden number. Some signals are hidden by a rule, and everyone is told the rule.</p>
+    <p class="lead step">Another group sees every signal. Same information, different view.</p>
+  </div>
+  <div class="cite">Enke (2020), The Quarterly Journal of Economics 135(3), 1363–1398</div>
+</section>
+
+<section data-who="Amalia" data-steps="2">
+  <div class="cols">
+    <div class="big">60<span style="font-size:.45em">%</span></div>
+    <div class="stack">
+      <h3>of participants were either fully rational, or <span class="red">fully ignored</span> what they could not see.</h3>
+      <p class="lead step">For many, the missing data did not even come to mind.</p>
+      <p class="lead step">More complex problem → <span style="color:var(--fg)">more neglect.</span></p>
+    </div>
+  </div>
+  <div class="cite">Enke (2020), The Quarterly Journal of Economics 135(3), 1363–1398</div>
+</section>
+
+<!-- ANDRIA -->
+<section data-who="Andria" data-steps="3">
+  <div class="stack">
+    <span class="eyebrow">Study 3 · What does not help</span>
+    <div class="row" style="gap:90px;align-items:flex-start">
+      <div class="card step" style="flex:1"><div class="k">Warnings</div><div class="v">The bias stays.</div></div>
+      <div class="card step" style="flex:1"><div class="k">More data</div><div class="v">More confidence,<br>not more caution.</div></div>
+      <div class="card step" style="flex:1"><div class="k">Exact rule known</div><div class="v gold">The bias disappears.</div></div>
+    </div>
+  </div>
+  <div class="cite">López-Pérez, Pintér &amp; Sánchez-Mangas (2022), J. of Economic Behavior &amp; Organization 195, 140–157</div>
+</section>
+
+<section data-who="Andria" data-steps="3">
+  <div class="stack">
+    <span class="eyebrow">Study 4 · The whole economy</span>
+    <h2>Successes are visible.<br><span class="dim">Failures are not.</span></h2>
+    <h3 class="step">Firms copy what seems to work → <span class="red">irrational booms.</span></h3>
+    <p class="lead step">They can collapse, or last forever.</p>
+    <div class="row step"><span class="pill">Investment booms</span><span class="pill">Merger &amp; IPO waves</span><span class="pill">Waves of new technology</span></div>
+  </div>
+  <div class="cite">Hirshleifer &amp; Plotkin (2021), PNAS 118(26), e2015571118</div>
+</section>
+
+<!-- FABIAN -->
+<section data-who="Fabián" data-steps="3">
+  <div class="stack">
+    <span class="eyebrow">Before you take advice</span>
+    <h2 class="step">Who is missing?</h2>
+    <h2 class="step"><span class="dim">What is the base rate?</span></h2>
+    <h2 class="step"><span class="dim">Would this story exist</span><br><span class="dim">if it had failed?</span></h2>
+  </div>
+</section>
+
+<section data-who="Fabián" data-steps="1">
+  <div class="cols">
+    <div class="stack">
+      <h1 style="font-size:104px">Look where<br><span class="gold">the holes<br>aren't.</span></h1>
+      <p class="lead step">Thank you. Questions?</p>
+    </div>
+    <div class="plane sh sa" id="plane2">
+      <svg viewBox="0 0 900 760" aria-hidden="true">
+        <use href="#dummy"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section data-who="References">
+  <div class="stack">
+    <span class="eyebrow">References</span>
+    <div class="refs">
+      <p><b>Barron, K., Huck, S., &amp; Jehiel, P. (2024).</b> Everyday econometricians: Selection neglect and overoptimism when learning from others. <i>American Economic Journal: Microeconomics, 16</i>(3), 162–198.</p><br>
+      <p><b>Enke, B. (2020).</b> What you see is all there is. <i>The Quarterly Journal of Economics, 135</i>(3), 1363–1398.</p><br>
+      <p><b>López-Pérez, R., Pintér, Á., &amp; Sánchez-Mangas, R. (2022).</b> Some conditions (not) affecting selection neglect: Evidence from the lab. <i>Journal of Economic Behavior &amp; Organization, 195</i>, 140–157.</p><br>
+      <p><b>Hirshleifer, D., &amp; Plotkin, J. B. (2021).</b> Moonshots, investment booms, and selection bias in the transmission of cultural traits. <i>PNAS, 118</i>(26), e2015571118.</p><br>
+      <p><b>Wald, A. (1943).</b> A method of estimating plane vulnerability based on damage of survivors. Statistical Research Group, Columbia University.</p><br>
+      <p><b>U.S. Bureau of Labor Statistics.</b> Business Employment Dynamics: establishment survival.</p><br><p><b>Video images:</b> Wikimedia Commons (U.S. Army Air Forces, public domain; Grandjean & McGeddon, Kuhlmann/MSC, MetalGearLiquid, A. Quintano, PCHS-NJROTC, S. Ballard; CC licences, credited in the video).</p><br>
+      <p style="font-size:20px">AI use (allowed for this assignment): slides, animations and video narration voice were made with AI assistance (Claude, ElevenLabs). Content checked by the group against the original papers.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+(function(){
+// plane holes (same on both planes)
+const H=[[80,326],[118,331],[142,338],[255,312],[268,332],[372,292],[396,322],[503,292],[526,322],[636,302],[650,332],[762,326],[802,336],[836,340],[446,330],[456,385],[440,432],[458,482],[447,524],[453,572],[445,614],[300,680],[360,674],[402,668],[520,668],[580,678],[620,684]];
+const holes=H.map(([x,y],k)=>`<circle class="hole" cx="${x}" cy="${y}" r="7.5" style="transition-delay:${k*45}ms"/>`).join('');
+document.getElementById('holes').innerHTML=holes;
+const p1=document.querySelector('#plane svg');
+document.querySelector('#plane2 svg').innerHTML=p1.innerHTML;
+
+const S=[...document.querySelectorAll('section')];
+const NOTES=window.NOTES||[];
+let i=0,st=0,started=false,t0=null;
+const stage=document.getElementById('stage');
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transformOrigin='center center';stage.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener('resize',fit);fit();
+const steps=s=>[...s.querySelectorAll('.step')];
+function show(){
+  S.forEach((s,k)=>s.classList.toggle('on',k===i));
+  const sec=S[i];steps(sec).forEach((e,k)=>e.classList.toggle('in',k<st));
+  // plane 1: holes appear with slide, armour on step 2
+  const pl=document.getElementById('plane');
+  if(sec.contains(pl)){pl.classList.toggle('sh',st>=1);pl.classList.toggle('sa',st>=2)}
+  document.getElementById('who').textContent=sec.dataset.who||'';
+  document.getElementById('num').textContent=`${i+1} / ${S.length}`;
+  const v=document.getElementById('vid');
+  if(sec.dataset.video){v.currentTime=0;v.play().catch(()=>{})}else{v.pause()}
+  location.hash='s'+(i+1);
+  sync();
+}
+function next(){if(!t0)t0=Date.now();const n=steps(S[i]).length;if(st<n){st++;show()}else if(i<S.length-1){i++;st=0;show()}}
+function prev(){if(st>0){st--;show()}else if(i>0){i--;st=steps(S[i]).length;show()}}
+addEventListener('keydown',e=>{
+  if(!started)return;
+  if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();next()}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev()}
+  else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{})}
+  else if(e.key==='b'||e.key==='B'){const b=document.getElementById('black');b.style.display=b.style.display==='block'?'none':'block'}
+  else if(e.key==='p'||e.key==='P'){openPresenter()}
+  else if(e.key==='0'){t0=Date.now();sync()}
+});
+document.getElementById('hint').addEventListener('click',()=>{started=true;document.getElementById('hint').style.display='none';document.documentElement.requestFullscreen?.().catch(()=>{})});
+addEventListener('click',e=>{if(started&&!e.target.closest('#hint'))next()});
+const m=location.hash.match(/^#s(\d+)$/);if(m){i=Math.min(S.length-1,+m[1]-1)}
+if(location.search.includes('shot')){started=true;document.getElementById('hint').style.display='none';st=steps(S[i]).length;document.querySelectorAll('section,.step').forEach(e=>e.style.transition='none')}
+
+// presenter window
+let pw=null;
+function openPresenter(){pw=window.open('presenter.html','presenter','width=1100,height=760');setTimeout(sync,600)}
+function sync(){
+  const data={i,st,n:S.length,steps:steps(S[i]).length,who:S[i].dataset.who,t0};
+  try{localStorage.setItem('loes-sync',JSON.stringify(data))}catch(e){}
+  if(pw&&!pw.closed)pw.postMessage({type:'sync',data},'*');
+}
+addEventListener('message',e=>{if(e.data&&e.data.type==='cmd'){if(e.data.cmd==='next')next();if(e.data.cmd==='prev')prev();if(e.data.cmd==='reset'){t0=Date.now();sync()}}});
+show();
+})();
+</script>
+</body>
+</html>

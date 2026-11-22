@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Presenter · The Advice of Survivors</title>
+<style>
+:root{--bg:#0b0b0c;--fg:#f5f5f7;--dim:#8e8e93;--line:#2c2c2e;--ok:#30d158;--warn:#ffd60a;--bad:#ff453a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,"Inter",system-ui,sans-serif;padding:22px 28px;display:flex;flex-direction:column;gap:16px;height:100vh}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.who{font-size:30px;font-weight:700}.who small{font-size:16px;color:var(--dim);font-weight:500;margin-left:10px}
+.clock{font-size:54px;font-weight:700;font-variant-numeric:tabular-nums}
+.target{font-size:16px;color:var(--dim)}
+.note{font-size:27px;line-height:1.5;flex:1;overflow:auto;border-top:1px solid var(--line);padding-top:16px}
+.note i{color:var(--warn);font-style:normal}
+.next{font-size:17px;color:var(--dim);border-top:1px solid var(--line);padding-top:10px}
+.bar{display:flex;gap:4px}.bar span{flex:1;height:6px;border-radius:3px;background:var(--line)}.bar span.d{background:var(--fg)}
+button{font:inherit;background:#1c1c1e;color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:8px 16px;font-size:16px;cursor:pointer}
+</style></head><body>
+<div class="top"><div class="who" id="who"></div><div style="text-align:right"><div class="clock" id="clock">0:00</div><div class="target" id="target"></div></div></div>
+<div class="bar" id="bar"></div>
+<div class="note" id="note"></div>
+<div class="next" id="next"></div>
+<div style="display:flex;gap:10px"><button onclick="cmd('prev')">← Back</button><button onclick="cmd('next')">Next →</button><button onclick="cmd('reset')">Reset timer</button><span class="target" style="align-self:center">Keys here also work: → ← · <i style="color:var(--warn);font-style:normal">yellow</i> = action, not spoken</span></div>
+<script src="notes.js"></script>
+<script>
+const END={Ilian:110,David:220,Amalia:380,Andria:490,'Fabián':570,References:600};
+let D=null;
+function cmd(c){if(opener)opener.postMessage({type:'cmd',cmd:c},'*')}
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();cmd('next')}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();cmd('prev')}});
+addEventListener('message',e=>{if(e.data&&e.data.type==='sync'){D=e.data.data;draw()}});
+addEventListener('storage',e=>{if(e.key==='loes-sync'){D=JSON.parse(e.newValue);draw()}});
+try{D=JSON.parse(localStorage.getItem('loes-sync'))}catch(e){}
+const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+function draw(){if(!D)return;const n=NOTES[D.i]||{};
+  document.getElementById('who').innerHTML=`${D.who}<small>slide ${D.i+1}/${D.n} · step ${D.st}/${D.steps}</small>`;
+  document.getElementById('note').innerHTML=(n.say||'').replace(/\[(.*?)\]/g,'<i>[$1]</i>');
+  const nx=NOTES[D.i+1];document.getElementById('next').textContent=nx?`Next: ${nx.title} (${nx.who})`:'Last slide';
+  document.getElementById('bar').innerHTML=Array.from({length:D.n},(_,k)=>`<span class="${k<=D.i?'d':''}"></span>`).join('');
+  tick()}
+function tick(){if(!D)return;const s=D.t0?(Date.now()-D.t0)/1000:0;const end=END[D.who]||600;const c=document.getElementById('clock');
+  c.textContent=fmt(s);c.style.color=s>570?'var(--bad)':s>end+15?'var(--warn)':'var(--fg)';
+  document.getElementById('target').textContent=`${D.who} should finish by ${fmt(end)} · hard stop 10:00`}
+setInterval(tick,500);draw();
+</script></body></html>
