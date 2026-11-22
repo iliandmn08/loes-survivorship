@@ -77,13 +77,11 @@ video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;
 <div id="stage">
 
 <!-- ILIAN -->
-<section data-who="Ilian" data-steps="3">
-  <div class="stack">
-    <div class="advice step">Drop out.</div>
-    <div class="advice step">Follow your passion.</div>
-    <div class="advice step">Never give up.</div>
-  </div>
+<section data-who="Ilian" data-video="1">
+  <video id="vid" src="assets/startups.mp4" preload="auto" playsinline></video>
+  <div class="printonly"><h2>Video: Who isn't here? (1 min 16)</h2><p class="lead">Played live from the presentation website.</p></div>
 </section>
+
 
 <section data-who="Ilian">
   <div class="stack">
@@ -94,38 +92,6 @@ video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;
   <div class="cite">David Bumci · Amalia Dinu-Macelaru · Andria Kvimsadze · Fabián Mafla · Ilian Dammene</div>
 </section>
 
-<section data-who="Ilian" data-steps="2">
-  <div class="cols" style="grid-template-columns:1fr 1fr;gap:60px">
-    <div class="stack" style="gap:26px">
-      <span class="eyebrow">1943 · Bombers that came back</span>
-      <h2 style="font-size:84px">Where would you add armour?</h2>
-      <p class="lead step">The holes are on the wings, the body and the tail.</p>
-      <h3 class="step" style="font-size:48px"><span class="gold">On the engines.</span><br><span class="dim">The planes hit there never came back.</span></h3>
-    </div>
-    <div class="plane" id="plane">
-      <svg viewBox="0 0 900 760" aria-label="B-17 bomber seen from above with bullet holes">
-        <defs>
-          <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3a3c"/><stop offset=".5" stop-color="#5a5a5e"/><stop offset="1" stop-color="#3a3a3c"/></linearGradient>
-          <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55555a"/><stop offset="1" stop-color="#363638"/></linearGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-        <g stroke="#6e6e73" stroke-width="1.2" stroke-linejoin="round">
-          <path fill="url(#wing)" d="M478 255 L858 316 Q874 320 872 334 L866 349 L478 345 Z"/>
-          <path fill="url(#wing)" d="M422 255 L42 316 Q26 320 28 334 L34 349 L422 345 Z"/>
-          <path fill="url(#wing)" d="M458 640 L636 668 Q648 671 646 682 L642 694 L456 690 Z"/>
-          <path fill="url(#wing)" d="M442 640 L264 668 Q252 671 254 682 L258 694 L444 690 Z"/>
-          <path fill="url(#metal)" d="M450 36 C472 36 482 72 482 124 L480 420 C478 540 468 640 459 712 Q450 722 441 712 C432 640 422 540 420 420 L418 124 C418 72 428 36 450 36 Z"/>
-        </g>
-        <path d="M436 74 Q450 58 464 74 L462 104 Q450 112 438 104 Z" fill="#1c1c1e" opacity=".9"/>
-        <line x1="450" y1="130" x2="450" y2="700" stroke="#2c2c2e" stroke-width="2"/>
-        <rect x="188" y="245" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="205" cy="243" r="6" fill="#8e8e93"/><line x1="167" y1="243" x2="243" y2="243" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="298" y="227" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="315" cy="225" r="6" fill="#8e8e93"/><line x1="277" y1="225" x2="353" y2="225" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="568" y="227" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="585" cy="225" r="6" fill="#8e8e93"/><line x1="547" y1="225" x2="623" y2="225" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="678" y="245" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="695" cy="243" r="6" fill="#8e8e93"/><line x1="657" y1="243" x2="733" y2="243" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-        <g class="armour" filter="url(#glow)"><rect x="175" y="231" width="60" height="130" rx="30"/><rect x="285" y="213" width="60" height="130" rx="30"/><rect x="555" y="213" width="60" height="130" rx="30"/><rect x="665" y="231" width="60" height="130" rx="30"/></g>
-        <g id="holes"></g>
-      </svg>
-    </div>
-  </div>
-  <div class="cite">Abraham Wald, Statistical Research Group, Columbia University (1943)</div>
-</section>
 
 <section data-who="Ilian" data-steps="2">
   <div class="stack">
@@ -138,6 +104,17 @@ video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;
     <p class="lead step">They don't write books. They don't give talks.</p>
   </div>
   <div class="cite">New U.S. businesses · U.S. Bureau of Labor Statistics, Business Employment Dynamics</div>
+</section>
+
+<section data-who="Ilian" data-steps="3">
+  <div class="stack">
+    <span class="eyebrow">It's everywhere</span>
+    <div class="row" style="gap:80px;align-items:flex-start;margin-top:20px">
+      <div class="card step" style="flex:1"><div class="k">Old buildings</div><div class="v">"They built better back then."</div><p class="lead" style="font-size:30px;margin-top:14px">The bad ones were demolished long ago.</p></div>
+      <div class="card step" style="flex:1"><div class="k">Investment funds</div><div class="v">"Fund returns look great on average."</div><p class="lead" style="font-size:30px;margin-top:14px">The worst funds closed and left the data.</p></div>
+      <div class="card step" style="flex:1"><div class="k">Famous dropouts</div><div class="v">"Gates and Zuckerberg dropped out."</div><p class="lead" style="font-size:30px;margin-top:14px">Nobody counts the dropouts who struggled.</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- DAVID -->
@@ -173,10 +150,6 @@ video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;
 </section>
 
 <!-- AMALIA -->
-<section data-who="Amalia" data-video="1">
-  <video id="vid" src="assets/startups.mp4" preload="auto" playsinline></video>
-  <div class="printonly"><h2>Video: Who isn't here? (1 min 16)</h2><p class="lead">Played live from the presentation website.</p></div>
-</section>
 
 <section data-who="Amalia" data-steps="2">
   <div class="stack">
@@ -263,13 +236,34 @@ video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;
 </section>
 
 </div>
+<div class="plane" id="plane" style="display:none">
+      <svg viewBox="0 0 900 760" aria-label="B-17 bomber seen from above with bullet holes">
+        <defs>
+          <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3a3c"/><stop offset=".5" stop-color="#5a5a5e"/><stop offset="1" stop-color="#3a3a3c"/></linearGradient>
+          <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55555a"/><stop offset="1" stop-color="#363638"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g stroke="#6e6e73" stroke-width="1.2" stroke-linejoin="round">
+          <path fill="url(#wing)" d="M478 255 L858 316 Q874 320 872 334 L866 349 L478 345 Z"/>
+          <path fill="url(#wing)" d="M422 255 L42 316 Q26 320 28 334 L34 349 L422 345 Z"/>
+          <path fill="url(#wing)" d="M458 640 L636 668 Q648 671 646 682 L642 694 L456 690 Z"/>
+          <path fill="url(#wing)" d="M442 640 L264 668 Q252 671 254 682 L258 694 L444 690 Z"/>
+          <path fill="url(#metal)" d="M450 36 C472 36 482 72 482 124 L480 420 C478 540 468 640 459 712 Q450 722 441 712 C432 640 422 540 420 420 L418 124 C418 72 428 36 450 36 Z"/>
+        </g>
+        <path d="M436 74 Q450 58 464 74 L462 104 Q450 112 438 104 Z" fill="#1c1c1e" opacity=".9"/>
+        <line x1="450" y1="130" x2="450" y2="700" stroke="#2c2c2e" stroke-width="2"/>
+        <rect x="188" y="245" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="205" cy="243" r="6" fill="#8e8e93"/><line x1="167" y1="243" x2="243" y2="243" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="298" y="227" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="315" cy="225" r="6" fill="#8e8e93"/><line x1="277" y1="225" x2="353" y2="225" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="568" y="227" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="585" cy="225" r="6" fill="#8e8e93"/><line x1="547" y1="225" x2="623" y2="225" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/><rect x="678" y="245" width="34" height="104" rx="17" fill="url(#metal)" stroke="#6e6e73" stroke-width="1.2"/><circle cx="695" cy="243" r="6" fill="#8e8e93"/><line x1="657" y1="243" x2="733" y2="243" stroke="#8e8e93" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+        <g class="armour" filter="url(#glow)"><rect x="175" y="231" width="60" height="130" rx="30"/><rect x="285" y="213" width="60" height="130" rx="30"/><rect x="555" y="213" width="60" height="130" rx="30"/><rect x="665" y="231" width="60" height="130" rx="30"/></g>
+        <g id="holes"></g>
+      </svg>
+</div>
 <script>
 (function(){
 // plane holes (same on both planes)
 const H=[[80,326],[118,331],[142,338],[255,312],[268,332],[372,292],[396,322],[503,292],[526,322],[636,302],[650,332],[762,326],[802,336],[836,340],[446,330],[456,385],[440,432],[458,482],[447,524],[453,572],[445,614],[300,680],[360,674],[402,668],[520,668],[580,678],[620,684]];
 const holes=H.map(([x,y],k)=>`<circle class="hole" cx="${x}" cy="${y}" r="7.5" style="transition-delay:${k*45}ms"/>`).join('');
 document.getElementById('holes').innerHTML=holes;
-const p1=document.querySelector('#plane svg');
+const p1=document.querySelector('#plane svg');document.querySelector('#plane').remove();
 document.querySelector('#plane2 svg').innerHTML=p1.innerHTML;
 
 const S=[...document.querySelectorAll('section')];
@@ -288,7 +282,7 @@ function show(){
   document.getElementById('who').textContent=sec.dataset.who||'';
   document.getElementById('num').textContent=`${i+1} / ${S.length}`;
   const v=document.getElementById('vid');
-  if(sec.dataset.video){v.currentTime=0;v.play().catch(()=>{})}else{v.pause()}
+  if(sec.dataset.video&&started&&!location.search.includes('shot')){v.currentTime=0;v.play().catch(()=>{})}else{v.pause()}
   location.hash='s'+(i+1);
   sync();
 }
@@ -303,7 +297,7 @@ addEventListener('keydown',e=>{
   else if(e.key==='p'||e.key==='P'){openPresenter()}
   else if(e.key==='0'){t0=Date.now();sync()}
 });
-document.getElementById('hint').addEventListener('click',()=>{started=true;document.getElementById('hint').style.display='none';document.documentElement.requestFullscreen?.().catch(()=>{})});
+document.getElementById('hint').addEventListener('click',()=>{started=true;document.getElementById('hint').style.display='none';show();document.documentElement.requestFullscreen?.().catch(()=>{})});
 addEventListener('click',e=>{if(started&&!e.target.closest('#hint'))next()});
 const m=location.hash.match(/^#s(\d+)$/);if(m){i=Math.min(S.length-1,+m[1]-1)}
 if(location.search.includes('shot')){started=true;document.getElementById('hint').style.display='none';st=steps(S[i]).length;document.querySelectorAll('section,.step').forEach(e=>e.style.transition='none')}
