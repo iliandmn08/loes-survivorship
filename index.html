@@ -51,6 +51,9 @@ p.lead{font-size:44px;font-weight:400;color:var(--dim);letter-spacing:-.01em;lin
 .field i{width:30px;height:30px;border-radius:50%;background:var(--fg);transition:background 1.2s var(--ease),opacity 1.2s var(--ease)}
 .field i.off{background:#2c2c2e}
 video{width:1560px;height:auto;border-radius:24px;background:#111;display:block;margin:0 auto}
+section[data-video]{padding:0}
+section[data-video] video{width:1920px;height:1080px;border-radius:0;background:#000;object-fit:contain}
+body.vidon .who,body.vidon .num{opacity:0}
 .refs{font-size:24px;line-height:1.55;color:var(--dim);max-width:1560px}
 .refs b{color:var(--fg);font-weight:600}
 #black{position:fixed;inset:0;background:#000;z-index:20;display:none}
@@ -281,6 +284,7 @@ function show(){
   if(sec.contains(pl)){pl.classList.toggle('sh',st>=1);pl.classList.toggle('sa',st>=2)}
   document.getElementById('who').textContent=sec.dataset.who||'';
   document.getElementById('num').textContent=`${i+1} / ${S.length}`;
+  document.body.classList.toggle('vidon',!!sec.dataset.video);
   const v=document.getElementById('vid');
   if(sec.dataset.video&&started&&!location.search.includes('shot')){v.currentTime=0;v.play().catch(()=>{})}else{v.pause()}
   location.hash='s'+(i+1);
