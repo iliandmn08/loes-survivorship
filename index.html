@@ -273,8 +273,9 @@ const S=[...document.querySelectorAll('section')];
 const NOTES=window.NOTES||[];
 let i=0,st=0,started=false,t0=null;
 const stage=document.getElementById('stage');
-function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transformOrigin='center center';stage.style.transform=`translate(-50%,-50%) scale(${s})`}
-addEventListener('resize',fit);fit();
+function fit(){const W=document.documentElement.clientWidth||innerWidth,H=document.documentElement.clientHeight||innerHeight;const s=Math.min(W/1920,H/1080);stage.style.transformOrigin='0 0';stage.style.left=Math.round((W-1920*s)/2)+'px';stage.style.top=Math.round((H-1080*s)/2)+'px';stage.style.transform=`scale(${s})`}
+function refit(){fit();setTimeout(fit,150);setTimeout(fit,600);setTimeout(fit,1200)}
+addEventListener('resize',refit);document.addEventListener('fullscreenchange',refit);document.addEventListener('webkitfullscreenchange',refit);fit();
 const steps=s=>[...s.querySelectorAll('.step')];
 function show(){
   S.forEach((s,k)=>s.classList.toggle('on',k===i));
